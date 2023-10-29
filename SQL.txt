@@ -1,0 +1,33 @@
+Задание 1.
+
+scooter_rent=# SELECT c.login, COUNT(*) as orders_courierId
+FROM "Orders" as o
+INNER JOIN "Couriers" as c ON o.Id = c.Id
+WHERE "inDelivery" = true
+GROUP BY login;
+ login | orders_courierid
+-------+------------------
+ ninja |                1
+ ninje |                1
+(2 rows)
+
+
+
+
+Задание 2.
+
+scooter_rent=# SELECT track,
+       CASE
+           WHEN finished = true THEN '2'
+           WHEN cancelled = true THEN '-1'
+           WHEN "inDelivery" = true THEN '1'
+           ELSE '0'
+       END as status
+FROM "Orders";
+ track  | status
+--------+--------
+  70223 | 1
+  70223 | 1
+ 240124 | 1
+ 240124 | 2
+(4 rows)
